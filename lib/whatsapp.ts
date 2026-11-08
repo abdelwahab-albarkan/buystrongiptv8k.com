@@ -1,5 +1,5 @@
 import { siteConfig } from "./site";
-import type { Plan } from "./plans";
+import { type AccountCount, type Plan, accountsLabel, formatPrice, getPrice } from "./plans";
 
 /**
  * Generates an official WhatsApp click-to-chat URL with a prefilled, URL-encoded message.
@@ -15,16 +15,16 @@ export function getWhatsAppLink(customMessage?: string): string {
 }
 
 /**
- * Generates a WhatsApp order link for a plan, prefilled with its name, price and connections
- * so the team knows exactly which plan the client picked.
+ * Generates a WhatsApp order link for a plan, prefilled with its duration, number of accounts
+ * and price so the team knows exactly what the client picked.
  */
-export function getPlanInquiryLink(plan: Plan): string {
+export function getPlanInquiryLink(plan: Plan, accounts: AccountCount): string {
   const message = [
     "Hello BuyStrongIPTV8K, I would like to order this plan:",
     "",
     `Plan: ${plan.label}`,
-    `Price: ${plan.price} (${plan.perMonth}/month)`,
-    `Connections: ${plan.connections}`,
+    `Accounts: ${accountsLabel(accounts)}`,
+    `Price: ${formatPrice(getPrice(plan, accounts))}`,
     "",
     "Please send me the payment details.",
   ].join("\n");

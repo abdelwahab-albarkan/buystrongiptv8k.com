@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { siteConfig } from "@/lib/site";
 import { getBreadcrumbJsonLd } from "@/lib/seo";
 import { PricingSection } from "@/components/sections/PricingSection";
+import { PriceTable } from "@/components/sections/PriceTable";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import Link from "next/link";
 import { ArrowLeft, Sparkles } from "lucide-react";
@@ -10,7 +11,7 @@ import { ArrowLeft, Sparkles } from "lucide-react";
 export const metadata: Metadata = {
   title: "Subscription Plans & Options",
   description:
-    "Explore available subscription plans from BuyStrongIPTV8K. Inquire directly on WhatsApp for current pricing, device compatibility, and personalized onboarding.",
+    "BuyStrongIPTV8K plans for 3, 6 or 12 months, for 1 to 4 devices. See every price, then order in seconds on WhatsApp.",
   alternates: {
     canonical: `${siteConfig.canonicalUrl}/plans`,
   },
@@ -49,12 +50,13 @@ export default function PlansPage() {
             Subscription Plans & Options
           </h1>
           <p className="mt-4 text-base sm:text-lg text-fg-2 max-w-3xl leading-relaxed font-normal">
-            Choose the subscription duration that best complements your entertainment routine. Because customized configurations depend on your specific hardware and network requirements, active rates and arrangement details are coordinated directly via WhatsApp.
+            Pick how many devices you need, choose 3, 6 or 12 months, and order on WhatsApp. The longer the plan, the less you pay per month.
           </p>
         </div>
       </div>
 
       <PricingSection showTitle={false} />
+      <PriceTable />
 
       {/* Step by Step Inquiry Section */}
       <section className="py-20 bg-bg-2 border-t border-line/80">
@@ -64,7 +66,7 @@ export default function PlansPage() {
               Simple 3-Step Process
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-fg">
-              How to Inquire About Your Plan
+              How to Order Your Plan
             </h2>
           </div>
 
@@ -77,7 +79,7 @@ export default function PlansPage() {
                 Select Your Plan
               </h3>
               <p className="text-xs sm:text-sm text-fg-2 leading-relaxed font-normal">
-                Click &apos;Ask About This Plan&apos; on any tier to launch WhatsApp with your desired duration prefilled in your inquiry message.
+                Choose your number of devices and duration, then tap &apos;Order&apos; to go to the checkout page for that exact plan.
               </p>
             </div>
 
@@ -109,9 +111,9 @@ export default function PlansPage() {
           <div className="pt-4">
             <WhatsAppButton
               size="lg"
-              message="Hello BuyStrongIPTV8K, I would like to inquire about current pricing and plan options."
+              message="Hello BuyStrongIPTV8K, I have a question about your plans."
             >
-              Contact Support for Current Rates
+              Questions? Chat with us
             </WhatsAppButton>
           </div>
         </div>

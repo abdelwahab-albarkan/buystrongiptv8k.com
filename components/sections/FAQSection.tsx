@@ -15,7 +15,7 @@ export const faqItems: FAQItem[] = [
     id: "faq-plans",
     question: "How can I check available subscription plans and pricing?",
     answer:
-      "Because customized plans and subscription periods are tailored based on your device setup and connection requirements, our current pricing is shared directly through WhatsApp. Click 'Ask About This Plan' on any plan card or message our team to receive current pricing and promotional arrangements.",
+      "All plans and prices are listed in the Pricing section. Plans last 3, 6 or 12 months and come with 1 to 4 accounts (1 account = 1 device watching at a time). Pick your plan and tap 'Order' to go to checkout.",
   },
   {
     id: "faq-contact",
