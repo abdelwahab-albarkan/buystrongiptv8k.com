@@ -43,3 +43,6 @@ next-env.d.ts
 # local backups and tooling
 /_original-images/
 /.claude/
+
+# local customer order data (PII)
+/data/

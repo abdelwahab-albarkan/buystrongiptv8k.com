@@ -2,8 +2,9 @@
 
 import React, { useState } from "react";
 import { Tv } from "lucide-react";
-import { accountOptions, subscriptionPlans, type AccountCount } from "@/lib/plans";
+import { accountOptions, subscriptionPlans, type AccountCount, type Plan } from "@/lib/plans";
 import { PricingCard } from "@/components/ui/PricingCard";
+import { OrderModal } from "@/components/ui/OrderModal";
 
 interface PricingSectionProps {
   showTitle?: boolean;
@@ -11,10 +12,18 @@ interface PricingSectionProps {
 
 export function PricingSection({ showTitle = true }: PricingSectionProps) {
   const [accounts, setAccounts] = useState<AccountCount>(1);
+  const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenOrder = (plan: Plan, accs: AccountCount) => {
+    setSelectedPlan(plan);
+    setAccounts(accs);
+    setIsModalOpen(true);
+  };
 
   return (
     <section id="plans" className="py-20 sm:py-24 bg-bg border-b border-line">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {showTitle && (
           <div className="text-center max-w-2xl mx-auto mb-10">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">
@@ -29,7 +38,7 @@ export function PricingSection({ showTitle = true }: PricingSectionProps) {
           </div>
         )}
 
-        {/* Step 1: number of devices */}
+        {/* Step 1: number of devices / connections */}
         <div className="mx-auto mb-12 max-w-xl text-center">
           <p className="flex items-center justify-center gap-2 text-sm font-bold uppercase tracking-wider text-fg">
             <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-xs text-white">1</span>
@@ -37,7 +46,7 @@ export function PricingSection({ showTitle = true }: PricingSectionProps) {
           </p>
           <div
             role="radiogroup"
-            aria-label="Number of accounts"
+            aria-label="Number of connections"
             className="mt-4 grid grid-cols-4 gap-2 rounded-2xl border border-line bg-bg-2 p-1.5"
           >
             {accountOptions.map((n) => {
@@ -49,26 +58,37 @@ export function PricingSection({ showTitle = true }: PricingSectionProps) {
                   role="radio"
                   aria-checked={active}
                   onClick={() => setAccounts(n)}
-                  className={`flex flex-col items-center gap-1 rounded-xl px-2 py-2.5 text-sm font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
+                  className={`relative flex flex-col items-center gap-1 rounded-xl px-2 py-2.5 text-sm font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer ${
                     active
                       ? "bg-blue-600 text-white shadow-md"
                       : "text-fg-2 hover:bg-surface hover:text-fg"
                   }`}
                 >
+                  {n > 1 && (
+                    <span
+                      className={`absolute -top-2.5 right-1 rounded-full px-1.5 py-0.5 text-[10px] font-extrabold uppercase leading-none shadow-sm ${
+                        active
+                          ? "bg-amber-400 text-slate-950"
+                          : "bg-emerald-600 text-white"
+                      }`}
+                    >
+                      -20%
+                    </span>
+                  )}
                   <span className="flex items-center gap-0.5" aria-hidden="true">
                     {Array.from({ length: n }).map((_, i) => (
                       <Tv key={i} className="h-3.5 w-3.5" strokeWidth={2.5} />
                     ))}
                   </span>
                   <span>
-                    {n} <span className="hidden sm:inline">{n > 1 ? "Devices" : "Device"}</span>
+                    {n} <span className="hidden sm:inline">{n > 1 ? "Connections" : "Connection"}</span>
                   </span>
                 </button>
               );
             })}
           </div>
           <p className="mt-3 text-xs text-muted">
-            1 account = 1 screen. Pick 2, 3 or 4 to watch on several TVs or phones at once.
+            1 connection = 1 screen. Pick 2, 3 or 4 to watch on several TVs or phones at once (20% OFF).
           </p>
         </div>
 
@@ -78,9 +98,14 @@ export function PricingSection({ showTitle = true }: PricingSectionProps) {
           Choose how long
         </p>
 
-        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-3 md:gap-5 items-center">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
           {subscriptionPlans.map((plan) => (
-            <PricingCard key={plan.id} plan={plan} accounts={accounts} />
+            <PricingCard
+              key={plan.id}
+              plan={plan}
+              accounts={accounts}
+              onOrder={handleOpenOrder}
+            />
           ))}
         </div>
 
@@ -88,6 +113,14 @@ export function PricingSection({ showTitle = true }: PricingSectionProps) {
           All prices in USD.
         </p>
       </div>
+
+      {/* Order Details Capture Modal */}
+      <OrderModal
+        plan={selectedPlan}
+        accounts={accounts}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </section>
   );
 }

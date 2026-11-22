@@ -11,7 +11,7 @@ import { ArrowLeft, Sparkles } from "lucide-react";
 export const metadata: Metadata = {
   title: "Subscription Plans & Options",
   description:
-    "BuyStrongIPTV8K plans for 3, 6 or 12 months, for 1 to 4 devices. See every price, then order in seconds on WhatsApp.",
+    "BuyStrongIPTV8K plans for 1, 3, 6 or 12 months, for 1 to 4 devices. See every price, then order in seconds on WhatsApp.",
   alternates: {
     canonical: `${siteConfig.canonicalUrl}/plans`,
   },
@@ -50,7 +50,7 @@ export default function PlansPage() {
             Subscription Plans & Options
           </h1>
           <p className="mt-4 text-base sm:text-lg text-fg-2 max-w-3xl leading-relaxed font-normal">
-            Pick how many devices you need, choose 3, 6 or 12 months, and order on WhatsApp. The longer the plan, the less you pay per month.
+            Pick how many devices you need, choose 1, 3, 6 or 12 months, and order on WhatsApp. The longer the plan, the less you pay per month.
           </p>
         </div>
       </div>

@@ -20,6 +20,7 @@ export interface Plan {
   /** Checkout link by number of accounts: index 0 = 1 account, index 3 = 4 accounts */
   buyLinks: [string, string, string, string];
   highlighted?: boolean;
+  badge?: string;
 }
 
 /** Features shared by every plan; only the number of accounts changes. */
@@ -32,40 +33,54 @@ export const planFeatures = [
 
 export const subscriptionPlans: Plan[] = [
   {
+    id: "plan-1-month",
+    label: "1 Month",
+    months: 1,
+    prices: [15, 24, 36, 48],
+    buyLinks: [
+      "https://todedev.com/buy/1-month-digital-system",
+      "https://todedev.com/buy/1-month-digital-system",
+      "https://todedev.com/buy/1-month-digital-system",
+      "https://todedev.com/buy/1-month-digital-system",
+    ],
+  },
+  {
     id: "plan-3-months",
     label: "3 Months",
     months: 3,
-    prices: [39.99, 59.99, 79.99, 99.99],
+    prices: [20, 32, 48, 64],
     buyLinks: [
-      "https://todedev.com/buy/3-months-1-account",
-      "https://todedev.com/buy/3-months-2-accounts",
-      "https://todedev.com/buy/3-months-3-accounts",
-      "https://todedev.com/buy/3-months-4-accounts",
+      "https://todedev.com/buy/3-months-digital-system",
+      "https://todedev.com/buy/3-months-digital-system",
+      "https://todedev.com/buy/3-months-digital-system",
+      "https://todedev.com/buy/3-months-digital-system",
     ],
   },
   {
     id: "plan-6-months",
     label: "6 Months",
     months: 6,
-    prices: [56.99, 84.99, 109.99, 134.99],
+    prices: [30, 48, 72, 96],
     buyLinks: [
-      "https://todedev.com/buy/6-months-1-account",
-      "https://todedev.com/buy/6-months-2-accounts",
-      "https://todedev.com/buy/6-months-3-accounts",
-      "https://todedev.com/buy/6-months-4-accounts",
+      "https://todedev.com/buy/6-months-digital-system",
+      "https://todedev.com/buy/6-months-digital-system",
+      "https://todedev.com/buy/6-months-digital-system",
+      "https://todedev.com/buy/6-months-digital-system",
     ],
+    badge: "Most Popular",
   },
   {
     id: "plan-12-months",
     label: "12 Months",
     months: 12,
-    prices: [79.99, 119.99, 149.99, 179.99],
+    prices: [45, 72, 108, 144],
     buyLinks: [
-      "https://todedev.com/buy/12-months-1-account",
-      "https://todedev.com/buy/12-months-2-accounts",
-      "https://todedev.com/buy/12-months-3-accounts",
-      "https://todedev.com/buy/12-months-4-accounts",
+      "https://todedev.com/buy/12-months-digital-system",
+      "https://todedev.com/buy/12-months-digital-system",
+      "https://todedev.com/buy/12-months-digital-system",
+      "https://todedev.com/buy/12-months-digital-system",
     ],
+    badge: "Best Value",
     highlighted: true,
   },
 ];
@@ -91,7 +106,7 @@ export function getSavingsPercent(plan: Plan, accounts: AccountCount): number {
 }
 
 export function accountsLabel(accounts: number): string {
-  return `${accounts} Account${accounts > 1 ? "s" : ""}`;
+  return `${accounts} Connection${accounts > 1 ? "s" : ""}`;
 }
 
 /** Lowest monthly price across all plans, used in headlines ("from $X/month"). */

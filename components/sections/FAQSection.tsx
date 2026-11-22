@@ -15,7 +15,7 @@ export const faqItems: FAQItem[] = [
     id: "faq-plans",
     question: "How can I check available subscription plans and pricing?",
     answer:
-      "All plans and prices are listed in the Pricing section. Plans last 3, 6 or 12 months and come with 1 to 4 accounts (1 account = 1 device watching at a time). Pick your plan and tap 'Order' to go to checkout.",
+      "All plans and prices are listed in the Pricing section. Plans last 1, 3, 6 or 12 months and come with 1 to 4 connections (1 connection = 1 device watching at a time). Pick your plan and tap 'Order' to go to checkout.",
   },
   {
     id: "faq-contact",
